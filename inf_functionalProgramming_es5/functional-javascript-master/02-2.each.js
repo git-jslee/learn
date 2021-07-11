@@ -11,11 +11,14 @@ var users = [
 
 function _filter(list, predi) {
   var new_list = [];
-  for (var i = 0; i < list.length; i++) {
-    if (predi(list[i])) {
-      new_list.push(list[i]);
+  //for (var i = 0; i < list.length; i++) {
+  //  if (predi(list[i])) {
+  //    new_list.push(list[i]); }}
+  _each(list, function (val) {
+    if (predi(val)) {
+      new_list.push(val);
     }
-  }
+  });
   return new_list;
 }
 
@@ -35,7 +38,6 @@ function _map(list, mapper) {
 function _each(list, iter) {
   for (var i = 0; i < list.length; i++) {
     iter(list[i]);
-    console.log(i);
   }
   return list;
 }
