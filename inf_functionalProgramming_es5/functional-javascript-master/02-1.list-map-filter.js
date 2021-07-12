@@ -43,7 +43,7 @@ for (var i = 0; i < temp_users.length; i++) {
 console.log(ages);
 
 // 2. _filter, _map으로 리팩토링
-// predicate : 술어.. verb..동사
+// predicate : 조건, 술어.. verb..동사
 function _filter(list, predi) {
   var new_list = [];
   for (var i = 0; i < list.length; i++) {

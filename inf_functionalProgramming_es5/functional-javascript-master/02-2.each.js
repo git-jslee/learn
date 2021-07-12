@@ -33,7 +33,8 @@ function _map(list, mapper) {
   return new_list;
 }
 
-//each
+// 3. each 만들기
+// 3-1 _each 롤 _map, _filter 중복 제거
 // iterate : (계산,컴퓨터 처리 절차를) 반복하다.
 function _each(list, iter) {
   for (var i = 0; i < list.length; i++) {
@@ -61,3 +62,34 @@ var ages = _map(under_30, function (user) {
   return user.age;
 });
 console.log(ages);
+
+
+// 3-2 외부 다형성
+// a. array_like, arguments, document.querySelectorAll
+// map, filter 는 javascript 에는 존재함.
+// 존재하는 함수를 만드는 이유는...기존  map, filter 는 매소드임..(함수 아님..즉 순수함수 아님..)
+// 매소드는 객체지향 프로그램임..map 함수는 array 가 아니면 사용이 안됨..
+// js 는 array like 함수가 많음...ex)JQuery..
+console.log([1, 2, 3].map(function(val) {
+  return val * 2;
+}));
+//오류발생..document.querySelectorAll 가 배열아님..
+/* 
+console.log(
+   document.querySelectorAll('*').map(function(node) {
+     return node.nodeName;
+   })
+);
+*/
+
+// 만든 _map 함수로 실행 -> 정상동작
+console.log(
+  _map(document.querySelectorAll('*'), function(node) {
+    return node.nodeName;
+  })
+);
+
+// 3-3. 내부 다형성
+// a. predi, iter, mapper
+// 함수형 프로그래밍에서는 두번째 함수의 역할에 따라 다양한 이름...predicate(조건, 술어), iter(반복하다), mapper....
+// 보조함수의 이름을 따로 불러줌..
