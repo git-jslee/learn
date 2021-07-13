@@ -29,9 +29,29 @@ function _map(list, mapper) {
   return new_list;
 }
 
+function _is_object(obj) {
+  return typeof obj == "object" && !!obj;
+}
+
+function _keys(obj) {
+  return _is_object(obj) ? Object.keys(obj) : [];
+}
+
 //  _each
+// _each에 null 넣어도 에러 안나게 수정
+/*
 function _each(list, iter) {
   for (var i = 0; i < list.length; i++) {
+    iter(list[i]);
+  }
+  return list;
+}
+*/
+// var _length = _get("length");
+
+function _each(list, iter) {
+  //for (var i = 0; i < list.length; i++) {
+  for (var i = 0, len = _length(list); i < len; i++) {
     iter(list[i]);
   }
   return list;
@@ -62,6 +82,9 @@ var add = _curry(function (a, b) {
 });
 
 // _get
+function _get(obj, key) {
+  return obj == null ? undefined : obj[key];
+}
 var _get = _curryr(function (obj, key) {
   return obj == null ? undefined : obj[key];
 });
