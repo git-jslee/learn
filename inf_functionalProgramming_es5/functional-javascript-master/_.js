@@ -82,3 +82,26 @@ function _reduce(list, iter, memo) {
   });
   return memo;
 }
+
+// 파이프라인.. map, filter 에 curryr 적용
+var _map = _curryr(_map),
+  _filter = _curryr(_filter);
+
+// _pipe, _go
+function _pipe() {
+  var fns = arguments;
+  return function (arg) {
+    return _reduce(
+      fns,
+      function (arg, fn) {
+        return fn(arg);
+      },
+      arg
+    );
+  };
+}
+
+function _go(arg) {
+  var fns = _rest(arguments);
+  return _pipe.apply(null, fns)(arg);
+}
