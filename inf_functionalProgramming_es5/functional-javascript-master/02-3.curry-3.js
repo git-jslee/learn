@@ -118,5 +118,3 @@ console.log(
     _get("name")
   )
 );
-
-// 4. _reduce 만들기

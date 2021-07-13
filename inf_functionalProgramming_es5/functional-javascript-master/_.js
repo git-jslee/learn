@@ -1,3 +1,14 @@
+var users = [
+  { id: 1, name: "ID", age: 36 },
+  { id: 2, name: "BJ", age: 11 },
+  { id: 3, name: "KD", age: 23 },
+  { id: 4, name: "OD", age: 17 },
+  { id: 5, name: "AP", age: 32 },
+  { id: 6, name: "QZ", age: 53 },
+  { id: 7, name: "UO", age: 41 },
+  { id: 8, name: "MN", age: 22 },
+];
+
 //  _filter
 function _filter(list, predi) {
   var new_list = [];
@@ -29,8 +40,6 @@ function _each(list, iter) {
 // _curry
 function _curry(fn) {
   return function (a, b) {
-    // 3항연산자
-    // return arguments.length == 2 ? fn(a,b):function(b){return fn(a,b);};
     if (arguments.length == 2) return fn(a, b);
     return function (b) {
       return fn(a, b);
@@ -48,7 +57,28 @@ function _curryr(fn) {
   };
 }
 
+var add = _curry(function (a, b) {
+  return a + b;
+});
+
 // _get
 var _get = _curryr(function (obj, key) {
   return obj == null ? undefined : obj[key];
 });
+
+// _reduce
+var slice = Array.prototype.slice;
+function _rest(list, num) {
+  return slice.call(list, num || 1);
+}
+
+function _reduce(list, iter, memo) {
+  if (arguments.length == 2) {
+    memo = list[0];
+    list = _rest(list);
+  }
+  _each(list, function (val) {
+    memo = iter(memo, val);
+  });
+  return memo;
+}
