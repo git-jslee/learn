@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const input = document.querySelector("input");
+        const span = document.querySelector("span");
+        const select = document.querySelector("select");
+        let selectValue = 10;
+        let currentValue;
+
+        const calculate = (value) => {
+          span.textContent = (currentValue * selectValue).toFixed(2);
+        };
+
+        select.addEventListener("change", (event) => {
+          const options = event.currentTarget.options;
+          const index = event.currentTarget.options.selectedIndex;
+          selectValue = Number(options[index].value);
+          console.log(selectValue);
+          calculate();
+        });
+
+        input.addEventListener("keyup", (event) => {
+          currentValue = Number(event.currentTarget.value);
+          calculate();
+        });
+      });
+    </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" /> cm =
+    <span></span>
+    <select>
+      <option value="10">mm</option>
+      <option value="0.01">m</option>
+      <option value="0.393701">inch</option>
+    </select>
+  </body>
+</html>
