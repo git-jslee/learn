@@ -1,47 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>할 일 목록</h1>
-    <input id="todo">
+    <input id="todo" />
     <button id="add-button">추가하기</button>
-    <div id="todo-list">
-
-    </div>
+    <div id="todo-list"></div>
 
     <script>
-        const input = document.querySelector('input')
-        const button = document.querySelector('button')
-        const todoList = document.querySelector('#todo-list')
-        const checkbox = document.querySelector('input')
-        let keyCount = 0
-        let todoTemp = ''
+      const input = document.querySelector("#todo");
+      const addButton = document.querySelector("#add-button");
+      const todoList = document.querySelector("#todo-list");
+      const checkbox = document.querySelector("input");
 
-        button.addEventListener('click', (event) => {
-            let inputText = input.value
-            todoTemp = todoTemp + `
-            <div id="todo_${keyCount}">
-            <input type="checkbox">
-            <span>${inputText}</span>
-            <button>제거하기</button>
-            </div>`
-            todoList.innerHTML = todoTemp
-            keyCount++
-            input.value = null
-        })
+      // 변수 선언
+      let keyCount = 0;
 
-        checkbox.addEventListener('click', (event) => {
-            console.log(event.currentTarget)
-            // if (event.currentTarget.input.value == True) {
-            //     console.log('체크')
-            // }
-        })
+      const addTodo = () => {
+        //   입력 양식에 내용이 없으면 추가하지 않습니다.
+        if (input.value.trim() === "") {
+          alert("할 일을 입력해 주세요.");
+          return;
+        }
 
+        // 문서 객체 설정
+        const item = document.createElement("div");
+        const checkbox = document.createElement("input");
+        const text = document.createElement("span");
+        const button = document.createElement("button");
+
+        // 문서 객체 식별할 키 생성
+        const key = keyCount;
+        keyCount += 1;
+
+        // item 객체를 조작하고 추가
+        item.setAttribute("data-key", key);
+        item.appendChild(checkbox);
+        item.appendChild(text);
+        item.appendChild(button);
+        todoList.appendChild(item);
+
+        // checkbox 객체 조작
+        checkbox.type = "checkbox";
+        checkbox.addEventListener("change", (event) => {
+          item.style.textDecoration = event.target.checked
+            ? "line-through"
+            : "";
+        });
+
+        // text 객체 조작
+        text.textContent = input.value;
+
+        // button 객체 조작
+        button.textContent = "제거하기";
+        button.addEventListener("click", () => {
+          removeTodo(key);
+        });
+
+        // 입력 양식의 내용 비움.
+        input.value = "";
+      };
+
+      const removeTodo = (key) => {
+        // 식별 키로 문서 객체 제거
+        const item = document.querySelector(`[data-key="${key}"`);
+        todoList.removeChild(item);
+      };
+
+      // 이벤트 연결
+      addButton.addEventListener("click", addTodo);
+      input.addEventListener("keyup", (event) => {
+        // 입력 양식에서 Enter 키를 누르면 바로 addTodl() 함수 호출
+        const ENTER = 13;
+        if (event.keyCode === ENTER) {
+          addTodo();
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
