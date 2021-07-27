@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const output = document.querySelector('#output')
+            const radios = document.querySelectorAll('[name=pet]')
+            console.log(output)
+
+            // 모든 라디오 버튼에 이벤트 연결
+            
+            radios.forEach((input) => {
+                input.addEventListener('change', (event) => {
+                let selectedPet = event.currentTarget
+                console.log(selectedPet)
+                output.textContent = `좋아하는 동물은 ${selectedPet.value}이시군요`
+                })
+            })
+        })
+        
+</script>
+    <title>라디오 버튼 사용해 보기</title>
+</head>
+<body>
+    <h3># 좋아하는 애완동물을 선택해주세요</h3>
+    <input type="radio" name="pet" value="강아지">
+    <span>강아지</span>
+    <input type="radio" name="pet" value="고양이">
+    <span>고양이</span>
+    <input type="radio" name="pet" value="햄스터">
+    <span>햄스터</span>
+    <input type="radio" name="pet" value="기타">
+    <span>기타</span>
+    <hr>
+    <h3 id='output'></h3>
+
+</body>
+</html>
