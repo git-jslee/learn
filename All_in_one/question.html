@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var allProducts = [{
+            name: '농구공',
+            description: '농구 황제 마이클 조던이 사용한 농구공입니다.',
+            price: 100000,
+        }, {
+            name: '축구공',
+            description: '축구 황제 메시가 사용한 축구공입니다.',
+            price: 50000,
+        }, {
+            name: '야구공',
+            description: '박찬호가 던졌던 야구공입니다.',
+            price: 75000,
+        }]
+
+        // question. procudts 배열을 넣었을 때, 가격이 60000원 이상인 product 객체를 담은 배열을 반환하는 함수를 만들어라
+
+        function pruductList (products) {
+            var newProducts =[];
+            for (product of products) {
+                if (product.price > 60000) {
+                    newProducts.push(product)
+                }
+            }
+            return newProducts
+        }
+
+        var a = pruductList(allProducts)
+        var b = allProducts.filter((product) => product.price > 60000)
+
+
+
+    </script>
+</body>
+</html>
