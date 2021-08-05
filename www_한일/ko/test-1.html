@@ -264,13 +264,13 @@
           <h3 class="tit_pd tit"><span>HANIL POWER TECH</span> Products</h3><!-- .tit_pd -->
           <div class="list_pd">
             <div class="tab_pd">
-              <ul>
-                <li id='click0' class="on">전체</li>
-                <li id='click1'>Engine parts</li>
-                <li id='click2'>Transmission Parts</li>
-                <li id='click3'>EGR Cooler Parts</li>
-                <li id='click4'>상용차 Parts</li>
-                <li id='click5'>중력주조품</li>
+              <ul id='mouseClick'>
+                <li class="on">전체</li>
+                <li>Engine parts</li>
+                <li>Transmission Parts</li>
+                <li>EGR Cooler Parts</li>
+                <li>상용차 Parts</li>
+                <li>중력주조품</li>
               </ul>
             </div><!-- .tab_pd -->
             <div id="products" class="pannel_pd_pc pc">
@@ -888,16 +888,11 @@
   click5Form = `<div class="on"> <ul class="slide4">` + click5Form + `</ul></div>`
   productElem.innerHTML = allhtmlForm
 
-  const click0 = document.querySelector('#click0')
-  const click1 = document.querySelector('#click1')
-  const click2 = document.querySelector('#click2')
-  const click3 = document.querySelector('#click3')
-  const click4 = document.querySelector('#click4')
-  const click5 = document.querySelector('#click5')
-  
-  click0.addEventListener('click', function () {
+  const mouseClick = document.querySelector('#mouseClick')
+    
+  mouseClick.addEventListener('click', function (event) {
+    console.log(event.target)
     productElem.innerHTML = allhtmlForm
-    $(this).addClass('on').siblings().removeClass('on');
     $('.slide4').slick({
         infinite: true,
         slidesToShow: 4,
@@ -907,46 +902,14 @@
         autoplaySpeed: 2000,
     });
   })
-  click1.addEventListener('click', function () {
-    productElem.innerHTML = click1Form
-    $(this).addClass('on').siblings().removeClass('on');
-    $('.slide4').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        arrows: false,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    });
-  })
+  
   click2.addEventListener('click', function () {
     productElem.innerHTML = click2Form
-    $(this).addClass('on').siblings().removeClass('on');
     productElem.firstChild.firstElementChild.style.display = 'flex';
+    $(this).addClass('on').siblings().removeClass('on');
 
   })
-  click3.addEventListener('click', function () {
-    productElem.innerHTML = click3Form;
-    $(this).addClass('on').siblings().removeClass('on');
-    productElem.firstChild.firstElementChild.style.display = 'flex';
-  })
-  click4.addEventListener('click', function () {
-    productElem.innerHTML = click4Form
-    $(this).addClass('on').siblings().removeClass('on');
-    productElem.firstChild.firstElementChild.style.display = 'flex';
-  })
-  click5.addEventListener('click', function () {
-    productElem.innerHTML = click5Form;
-    $(this).addClass('on').siblings().removeClass('on');
-    $('.slide4').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        arrows: false,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    });
-  })
+  
 
 </script>
 
@@ -955,7 +918,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="../asset/js/common.js"></script>
-<script src="../asset/js/main-1.js"></script>
+<script src="../asset/js/main.js"></script>
 <script src="../asset/js/cs.js"></script>
 <script>
 AOS.init({
