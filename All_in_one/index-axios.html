@@ -4,26 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>그랩마켓</title>
     <link rel="stylesheet" href="index.css" type="text/css" />
-    <script>
-      var products = [{
-            name: '농구공',
-            price: 100000,
-            seller: '조던',
-            imageUrl: './images/products/basketball1.jpeg'
-        }, {
-            name: '축구공',
-            price: 50000,
-            seller: '메시',
-            imageUrl: './images/products/soccerball1.jpg'
-        }, {
-            name: '키보드',
-            price: 10000,
-            seller: '그랩',
-            imageUrl: './images/products/keyboard1.jpg'
-        }]
-    </script>
   </head>
   <body>
     <div id="header">
@@ -41,28 +24,32 @@
     <div id="footer"></div>
     <script>
 
-
-      url = 'https://a0cb0f8c-dcbc-46ab-903a-8dcd625afa87.mock.pstmn.io/products'
       var productHtml = ''
-      for (product of products) {
-        productHtml += `
-        <div class="product-card">
-            <div>
-              <img class="product-img" src="${product.imageUrl}" alt="">
-            </div>
-            <div class="product-contents">
-              <span class="product-name">${product.name}</span>
-              <span class="product-price">${product.price}</span>
-              <div class="product-seller">
-                <img class="product-avatar" src="./images/icons/avatar.png" alt="">
-                <span>${product.seller}</span>
+      url = 'https://a0cb0f8c-dcbc-46ab-903a-8dcd625afa87.mock.pstmn.io/products'
+      axios.get(url).then(function(result) {
+        const products = result.data.products
+        for (product of products) {
+          productHtml += `
+          <div class="product-card">
+              <div>
+                <img class="product-img" src="${product.imageUrl}" alt="">
+              </div>
+              <div class="product-contents">
+                <span class="product-name">${product.name}</span>
+                <span class="product-price">${product.price}</span>
+                <div class="product-seller">
+                  <img class="product-avatar" src="./images/icons/avatar.png" alt="">
+                  <span>${product.seller}</span>
+                </div>
               </div>
             </div>
-          </div>
-        </div> 
-        `
-      }
-      document.querySelector('#product-list').innerHTML = productHtml;
+          </div> 
+          `
+        }
+        document.querySelector('#product-list').innerHTML = productHtml;
+      }).catch( function (error) {
+        console.log(`에러발생: `, error)
+      })
     </script>
   </body>
 </html>
